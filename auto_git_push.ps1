@@ -1,5 +1,5 @@
 Set-Location "C:\pp2"
 git add .
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-git commit -m "Автообновление==: $timestamp"
+git commit -m "Autoupdate==: $timestamp"
 git push origin main
