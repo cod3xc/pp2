@@ -1,0 +1,1 @@
+"[$timestamp] Скрипт выполнен" | Out-File -Append "C:\pp2\git_log.txt"
