@@ -3,7 +3,7 @@ import os
 
 musicpath = "./Lab7"
 tracks = [f for f in os.listdir(musicpath)
-          if f.lower().endswith((".mp3",".wav"))]
+          if f.lower().endswith((".mp3"))]
 if not tracks:
     raise SystemExit("No music files")
 pygame.init()
