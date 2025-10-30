@@ -6,7 +6,7 @@ pygame.init()
 Width, Height = 600, 600
 CENTER = (Width // 2, Height // 2)
 screen = pygame.display.set_mode((Width, Height))
-pygame.display.set_caption("Mickey Clock")
+pygame.display.set_caption("Clock")
 clock = pygame.time.Clock()
 bg = pygame.image.load("Lab7/base_micky.jpg").convert()
 minute_img = pygame.image.load("Lab7/minute.png").convert_alpha()
