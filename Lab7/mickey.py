@@ -14,11 +14,10 @@ second_img = pygame.image.load("Lab7/second.png").convert_alpha()
 bg = pygame.transform.scale(bg, (Width, Height))
 x = CENTER[0]
 y = CENTER[1]  
-
 running = True
 while running:
-    for e in pygame.event.get():
-        if e.type == pygame.QUIT:
+    for a in pygame.event.get():
+        if a.type == pygame.QUIT:
             running = False
     t = time.localtime()
     sec = t.tm_sec
@@ -32,7 +31,6 @@ while running:
     screen.blit(bg, (0, 0))
     screen.blit(rot_min, min_rect)
     screen.blit(rot_sec, sec_rect)
-
     pygame.display.flip()
     clock.tick(60)
 
