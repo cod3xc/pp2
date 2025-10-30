@@ -8,13 +8,12 @@ red = (255, 0, 0)
 white = (255, 255, 255)
 x = Width
 y = Height
-step = 20
 radius = 25
-running = True
-while running:
+working = True
+while working:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            working = False
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP]: y -= 20
     if pressed[pygame.K_DOWN]: y += 20
