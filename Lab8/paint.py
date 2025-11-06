@@ -1,5 +1,14 @@
 import pygame
 
+def get_rect(pos1, pos2):
+    x1, y1 = pos1
+    x2, y2 = pos2
+    left = min(x1, x2)
+    top = min(y1, y2)
+    width = abs(x1 - x2)
+    height = abs(y1 - y2)
+    return pygame.Rect(left, top, width, height)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((640, 480))
@@ -14,15 +23,6 @@ def main():
     start_pos = None
     tool = 'draw'
     font = pygame.font.Font(pygame.font.get_default_font(), 20)
-
-def get_rect(pos1, pos2):
-    x1, y1 = pos1
-    x2, y2 = pos2
-    left = min(x1, x2)
-    top = min(y1, y2)
-    width = abs(x1 - x2)
-    height = abs(y1 - y2)
-    return pygame.Rect(left, top, width, height)
 
     while True:
         
