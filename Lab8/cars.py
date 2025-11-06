@@ -24,7 +24,7 @@ SPEED = 5
 SCORE = 0
 COIN_SCORE = 0#added coin score
  
-#Setting up Fonts
+#Setting up Font
 font = pygame.font.SysFont("Verdana", 60)
 font_small = pygame.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, BLACK)
