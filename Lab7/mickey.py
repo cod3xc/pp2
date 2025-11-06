@@ -1,6 +1,5 @@
 import pygame
 import time
-import math
 
 pygame.init()
 Width, Height = 1000, 800
