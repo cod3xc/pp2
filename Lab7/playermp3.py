@@ -4,7 +4,7 @@ import os
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((500, 200))
-pygame.display.set_caption("Player: SPACE=Play/Pause, Arrowleft/Arrowright=Prev/Next")
+pygame.display.set_caption("SPACE=Play/Pause, Arrowleft/Arrowright=Prev/Next")
 musicpath = "./Lab7"
 tracks = [a for a in os.listdir(musicpath)
           if a.lower().endswith((".mp3"))]

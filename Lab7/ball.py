@@ -21,12 +21,12 @@ while working:
     if pressed[pygame.K_RIGHT]: x += 20
     if x < radius:
         x = radius
-    if x > Width - radius:
-        x = Width - radius
+    if x > Width:
+        x = 0
     if y < radius:
-        y = radius
-    if y > Height - radius:
-        y = Height - radius
+        y = 0
+    if y > Height:
+        y = Height
     screen.fill(white)
     pygame.draw.circle(screen, red, (x, y), radius)
     pygame.display.flip()

@@ -3,7 +3,7 @@ import time
 import math
 
 pygame.init()
-Width, Height = 600, 600
+Width, Height = 1000, 800
 CENTER = (Width // 2, Height // 2)
 screen = pygame.display.set_mode((Width, Height))
 pygame.display.set_caption("Clock")
@@ -23,7 +23,7 @@ while running:
     sec = t.tm_sec
     minute = t.tm_min
     sec_angle = sec * 6      
-    min_angle = minute * 6 + sec*0.1  
+    min_angle = minute * 6 + sec*0.1
     rot_sec = pygame.transform.rotate(second_img, -sec_angle)
     rot_min = pygame.transform.rotate(minute_img, -min_angle)
     sec_rect = rot_sec.get_rect(center=(x, y))
