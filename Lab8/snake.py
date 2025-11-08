@@ -41,7 +41,7 @@ def generate_food(snake_list):
         foody = round(random.randrange(0, displayheight - snake_block) / snake_block) * snake_block
         if [foodx, foody] not in snake_list:
             return foodx, foody
-# Main game loop
+#main game loop
 def gameLoop():
     game_over = False
     game_close = False
@@ -55,7 +55,7 @@ def gameLoop():
     current_speed = base_snake_speed 
     food_eaten_this_level = 0   
     foodx, foody = generate_food(snake_List) 
-# Main game loop
+#main game loop
     while not game_over:
         while game_close:
             display.fill(bgcolor)
@@ -73,7 +73,7 @@ def gameLoop():
                 if event.type == pygame.QUIT:
                     game_over = True
                     game_close = False
-# Main game events
+#main game events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_over = True
@@ -90,14 +90,14 @@ def gameLoop():
                 elif event.key == pygame.K_DOWN and y1_change == 0:
                     y1_change = snake_block
                     x1_change = 0
-# Move the snake
+#move the snake
         if x1 >= displaywidth or x1 < 0 or y1 >= displayheight or y1 < 0:
             game_close = True
         x1 += x1_change
         y1 += y1_change
         display.fill(bgcolor)
         pygame.draw.rect(display, red, [foodx, foody, snake_block, snake_block])
-# Draw snake
+#draw snake
         snake_Head = []
         snake_Head.append(x1)
         snake_Head.append(y1)
@@ -107,11 +107,11 @@ def gameLoop():
         for x in snake_List[:-1]:
             if x == snake_Head:
                 game_close = True
-# Draw everything
+#draw everything
         our_snake(snake_block, snake_List)
         show_stats(Length_of_snake - 1, level)
         pygame.display.update()
-# Check if snake has eaten the food
+#check if snake has eaten the food
         if x1 == foodx and y1 == foody:
             foodx, foody = generate_food(snake_List)
             Length_of_snake += 1

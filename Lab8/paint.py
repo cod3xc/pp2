@@ -1,5 +1,15 @@
 import pygame
 
+def get_rect(pos1, pos2):
+    x1, y1 = pos1
+    x2, y2 = pos2
+    left = min(x1, x2)
+    top = min(y1, y2)
+    width = abs(x1 - x2)
+    height = abs(y1 - y2)
+    return pygame.Rect(left, top, width, height)
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((640, 480))
@@ -14,15 +24,6 @@ def main():
     start_pos = None
     tool = 'draw'
     font = pygame.font.Font(pygame.font.get_default_font(), 20)
-
-def get_rect(pos1, pos2):
-    x1, y1 = pos1
-    x2, y2 = pos2
-    left = min(x1, x2)
-    top = min(y1, y2)
-    width = abs(x1 - x2)
-    height = abs(y1 - y2)
-    return pygame.Rect(left, top, width, height)
 
     while True:
         
@@ -86,12 +87,12 @@ def get_rect(pos1, pos2):
                     
                     if tool == 'rect' and start_pos:
                         rect = get_rect(start_pos, end_pos)
-                        pygame.draw.rect(background, color, rect, 2)
+                        pygame.draw.rect(background, color, rect, 0)
                     
                     elif tool == 'circle' and start_pos:
                         rect = get_rect(start_pos, end_pos)
                         if rect.width > 0 and rect.height > 0:
-                            pygame.draw.ellipse(background, color, rect, 2)
+                            pygame.draw.ellipse(background, color, rect, 0)
                     
                     start_pos = None
 
