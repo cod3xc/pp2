@@ -22,19 +22,23 @@ SCREEN_WIDTH = 400
 SCREEN_HEIGHT = 600
 SPEED = 5
 SCORE = 0
-COIN_SCORE = 0#added coin score
+COIN_SCORE = 0 #added coin score
  
 #Setting up Fonts
 font = pygame.font.SysFont("Verdana", 60)
 font_small = pygame.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, BLACK)
  
-background = pygame.image.load("AnimatedStreet.png")
- 
 #Create a white screen 
 DISPLAYSURF = pygame.display.set_mode((400,600))
 DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Game")
+
+background = pygame.image.load("AnimatedStreet.png")
+
+#Setting up Red coin
+redcoin = pygame.image.load("coin2.png").convert_alpha()
+redcoin = pygame.transform.scale(redcoin, (30, 30))
 
 #Creating a Coin
 class Coin(pygame.sprite.Sprite):
@@ -79,10 +83,6 @@ class Player(pygame.sprite.Sprite):
         
     def move(self):
         pressed_keys = pygame.key.get_pressed()
-       #if pressed_keys[K_UP]:
-            #self.rect.move_ip(0, -5)
-       #if pressed_keys[K_DOWN]:
-            #self.rect.move_ip(0,5)
          
         if self.rect.left > 0:
               if pressed_keys[K_LEFT]:
@@ -90,11 +90,12 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right < SCREEN_WIDTH:        
               if pressed_keys[K_RIGHT]:
                   self.rect.move_ip(5, 0)
-                   
+                    
 #Setting up Sprites        
 P1 = Player()
 E1 = Enemy()
-C1 = Coin()#added coin
+C1 = Coin() #added coin
+yellowcoin = C1.image 
  
 #Creating Sprites Groups
 enemies = pygame.sprite.Group()
@@ -122,7 +123,8 @@ while True:
     DISPLAYSURF.blit(background, (0,0))
     scores = font_small.render(str(SCORE), True, BLACK)
     DISPLAYSURF.blit(scores, (10,10))
-# Adding coin score display
+
+    # Adding coin score display
     coin_text = font_small.render(f"Coins: {COIN_SCORE}", True, BLACK)
     coin_rect = coin_text.get_rect()
     coin_rect.topright = (SCREEN_WIDTH - 10, 10)
@@ -140,19 +142,33 @@ while True:
                     
           DISPLAYSURF.fill(RED)
           DISPLAYSURF.blit(game_over, (30,250))
-           
+        
           pygame.display.update()
           for entity in all_sprites:
                 entity.kill() 
           time.sleep(2)
           pygame.quit()
           sys.exit()        
-#Check collision with coin
+
+    #Checking collision between Player and Coin
     if pygame.sprite.spritecollideany(P1, pygame.sprite.Group(C1)):
-          pygame.mixer.Sound('coin.wav').play()
-          COIN_SCORE += 1 #Increment coin score
-          C1.rect.top = 0
-          C1.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
-         
+        pygame.mixer.Sound('coin.wav').play()
+        
+        if C1.image == redcoin: #super coin
+            COIN_SCORE += 2
+        else: 
+            COIN_SCORE += 1 
+            # count normal coins
+        if COIN_SCORE % 5 == 0: 
+            SPEED += 0.5 
+            
+        C1.rect.top = 0
+        C1.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
+        #Randomly decide if next coin is super coin
+        if random.randint(1, 5) == 1: 
+            C1.image = redcoin
+        else:
+            C1.image = yellowcoin
+            
     pygame.display.update()
     FramePerSec.tick(FPS)
