@@ -9,7 +9,6 @@ def get_rect(pos1, pos2):
     height = abs(y1 - y2)
     return pygame.Rect(left, top, width, height)
 
-
 def main():
     pygame.init()
     screen = pygame.display.set_mode((640, 480))
@@ -33,7 +32,7 @@ def main():
         ctrl_held = pressed[pygame.K_LCTRL] or pressed[pygame.K_RCTRL]
         
         for event in pygame.event.get():
-            # determin if X was clicked, or Ctrl+W or Alt+F4 was used
+            # determine if X was clicked, or Ctrl+W or Alt+F4 was used
             if event.type == pygame.QUIT:
                 return
             if event.type == pygame.KEYDOWN:
@@ -41,6 +40,17 @@ def main():
                     return
                 if event.key == pygame.K_F4 and alt_held:
                     return
+                
+                # Tool selection keys
+                elif event.key == pygame.K_5:
+                    tool = 'square'           
+                elif event.key == pygame.K_6:
+                    tool = 'right_tri'        
+                elif event.key == pygame.K_7:
+                    tool = 'eq_tri'           
+                elif event.key == pygame.K_8:
+                    tool = 'rhombus'
+                
                 if event.key == pygame.K_ESCAPE:
                     return
                 # determine if a letter key was pressed
@@ -87,13 +97,47 @@ def main():
                     
                     if tool == 'rect' and start_pos:
                         rect = get_rect(start_pos, end_pos)
-                        pygame.draw.rect(background, color, rect, 0)
+                        pygame.draw.rect(background, color, rect, 2)
                     
                     elif tool == 'circle' and start_pos:
                         rect = get_rect(start_pos, end_pos)
                         if rect.width > 0 and rect.height > 0:
-                            pygame.draw.ellipse(background, color, rect, 0)
-                    
+                            pygame.draw.ellipse(background, color, rect, 2)
+                            
+                    elif tool == 'square' and start_pos:
+                        # Calculate rect normally
+                        rect = get_rect(start_pos, end_pos)
+                        # Use the minimum side to make it a perfect square
+                        side = min(rect.width, rect.height)
+                        pygame.draw.rect(background, color, (rect.left, rect.top, side, side), 2)
+
+                    elif tool == 'right_tri' and start_pos:
+                        rect = get_rect(start_pos, end_pos)
+                        # Points for right triangle 
+                        points = [(rect.left, rect.top), (rect.left, rect.bottom), (rect.right, rect.bottom)]
+                        pygame.draw.polygon(background, color, points, 2)
+
+                    elif tool == 'eq_tri' and start_pos:
+                        rect = get_rect(start_pos, end_pos)
+                        # Points for equilateral triangle
+                        points = [
+                            (rect.centerx, rect.top),
+                            (rect.left, rect.bottom),
+                            (rect.right, rect.bottom)
+                        ]
+                        pygame.draw.polygon(background, color, points, 2)
+
+                    elif tool == 'rhombus' and start_pos:
+                        rect = get_rect(start_pos, end_pos)
+                        # Connect the midpoints of the rect sides
+                        points = [
+                            (rect.centerx, rect.top),      # Top
+                            (rect.right, rect.centery),    # Right
+                            (rect.centerx, rect.bottom),   # Bottom
+                            (rect.left, rect.centery)      # Left
+                        ]
+                        pygame.draw.polygon(background, color, points, 2)
+
                     start_pos = None
 
             if event.type == pygame.MOUSEMOTION:
@@ -110,7 +154,7 @@ def main():
         
         screen.blit(background, (0, 0))
         
-        ui_str = f"Tool: {tool} [1-4] | Color: {mode} [R,G,B] | Size: {radius} [Scroll]"
+        ui_str = f"Tool: {tool} [1-8] | Color: {mode} [R,G,B] | Size: {radius} [Scroll]"
         ui_text = font.render(ui_str, True, (255, 255, 255))
         screen.blit(ui_text, (5, 5))
         
