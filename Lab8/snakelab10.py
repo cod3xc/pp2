@@ -100,12 +100,12 @@ def message(msg, color, y_displace=0):
 # Walls
 def get_walls(level):
     walls = []
-    # Level 2+: Horizontal wall in the middle
+    # Level 2 = wall in the middle
     if level >= 2:
         for x in range(200, 600, snake_block):
             walls.append([x, 300])
     
-    # Level 3+: Add vertical walls
+    # Level 3 =  vertical walls
     if level >= 3:
         for y in range(100, 500, snake_block):
             walls.append([160, y])
@@ -117,7 +117,7 @@ def generate_food(snake_list, walls):
     while True:
         foodx = round(random.randrange(0, W - snake_block) / snake_block) * snake_block
         foody = round(random.randrange(0, H - snake_block) / snake_block) * snake_block
-        # Food must not be on snake OR inside a wall
+        # Food must not be on snake or inside a wall
         if [foodx, foody] not in snake_list and [foodx, foody] not in walls:
             weight = 3 if random.randint(1, 5) == 1 else 1
             spawn_time = pygame.time.get_ticks() 
