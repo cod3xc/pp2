@@ -3,7 +3,7 @@ import pygame, sys
 from pygame.locals import *
 import random, time
  
-#Initialzin
+#Initialzing
 pygame.init()
  
 #Setting up FPS 
