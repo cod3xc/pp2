@@ -176,4 +176,8 @@ def gameLoop():
     pygame.quit()
     quit()
 
+<<<<<<< HEAD
 gameLoop()
+=======
+gameLoop()
+>>>>>>> 300d99da6f70efee70d45a597357dcefe54f9c7f
